@@ -1,0 +1,130 @@
+html, body{margin:0px;padding:0px;border:0px;font-size:13px;font-family:Arial;height:100%;}
+a{text-decoration:none}
+div{border-radius:0px !important;}
+.container-fluid{
+	width:100%;margin:0px auto;
+}
+.container-fluid .header{padding:20px 40px;border-bottom:solid 1px #CCC;border-top:solid 10px #94D600;}
+.container-fluid .header .row .col-lg-6:nth-child(2){text-align:right;}
+.container-fluid .header .row .col-lg-6 span{display:block;}
+.container-fluid .header .row .col-lg-6 span.login-name{font-size:1.5em;line-height:50px;}
+.container-fluid .main-content{padding:20px 40px;}
+
+.container-fluid .main-content .row .col-lg-3 .buscar-home{background:url(../img/ico-lupa.png);background-repeat:no-repeat;border:solid 1px #CCC;padding:2px 30px;background-position:5px 2px;margin-bottom:0px;width:100%;border-radius:3px;}
+
+.container-fluid .main-content .row .agregar-sucursal{padding:10px 0px;}
+.container-fluid .main-content .row .agregar-sucursal a{font-size:0.9em;text-decoration:underline;
+cursor:pointer}
+
+.panel-group .panel + .panel{margin-top:0px !important;}
+
+.txt-modal{border:solid 1px #CCC;padding:2px 10px;width:100%;margin-bottom:10px;}
+.btn{background-color:#04B13D;color:#FFF;border:none}
+.btn:focus, .btn.active, .btn:hover{background-color:#94D600;color:#FFF}
+
+.accordion-toggle[aria-expanded="false"]{background-image:url(../img/arrow-listado.png);background-repeat:no-repeat;background-position:right center;}
+.accordion-toggle[aria-expanded="true"]{background-image:url(../img/arrow-listado-open.png);background-repeat:no-repeat;background-position:right center;}
+.accordion-toggle[aria-expanded=""]{background-image:url(../img/arrow-listado.png);background-repeat:no-repeat;background-position:right center;}
+.panel-title > a{display:block;}
+
+.panel-body{max-height:170px;overflow-y:scroll;}
+.panel-body div.ng-binding.ng-scope:last-child{margin-bottom:15px;}
+.header h4{margin:20px 0px 0px;}
+.header h4 a{color:#666;}
+.header h4 a.active{color:#333;font-weight:bold;}
+.separador-h3{color:#CCC;margin:0px 10px;}
+.ng-binding{font-weight:bold;}
+.panel-body div.ng-scope a{font-weight:normal;}
+.panel-body div.ng-scope a::before {
+  content: "• ";
+  color: #333; /* or whatever color you prefer */
+}
+
+.logo-login{text-align:center;}
+.row.content.login{}
+.container-fluid.login{height:100%;display: flex;align-items: center;justify-content: center;}
+.txt-login{border-radius:3px;border:solid 1px #CCC;padding:4px 10px;text-align:center;min-width:280px;margin-top:20px;}
+.msg-login{display:block;color:#04B13D}
+.logo-login{padding-bottom:30px}
+.row.content.login h5{font-weight:bold;}
+.btn-login{margin:20px 0px;}
+.alerta{display: block;max-width: 280px;margin: 0px auto;color:#04B13D}
+
+.ingreso-datos-modal{max-width:80%;margin:0px auto;}
+.ingreso-datos-modal .col-lg-4{font-weight:bold;line-height:2em}
+.ingreso-datos-modal .col-lg-4, .ingreso-datos-modal .col-lg-8{margin-bottom:20px;}
+
+select#ZonaSucursal{border:solid 1px #CCC;padding:4px 5px;width:100%}
+
+.modal-footer{text-align:center;border-top:none;padding-bottom:0px;}
+.modal-footer .btn{background:none;color:#04B13D;text-decoration:underline;font-weight:bold}
+.contenedor-botones-modal{clear: both;display: flex;align-content: center;justify-content: center;}
+.contenedor-botones-modal .btn{margin:0px 20px;border-radius:0px;background-color:#000;}
+.contenedor-botones-modal .btn:hover, .contenedor-botones-modal .btn:focus{background-color:#666}
+#modal-title{text-align:center;font-weight:bold}
+
+.modal-header{border-top:solid 10px #94D600;padding:0px 0px 15px;}
+h6.modal-alert-form{margin:0px 0px 15px;background:#000;color:#FFF;padding:5px;text-align:center;font-weight:bold;}
+
+.cabecera-tabla{background:#000;color:#FFF;border-right:solid 1px #FFF}
+.last-tabla{border-right:none;}
+.tabla-central{border: solid 1px #999}
+.tabla-central th, .tabla-central td{padding:5px 15px;}
+.tabla-central td{border-right:solid 1px #CCC;border-bottom:solid 1px #CCC;}
+
+h3.titulo-seccion{font-weight:bold;margin-bottom:18px;margin-top:0px;}
+h3.titulo-seccion span.txt-green{color:#94D600}
+#tabla-content_info{display:none;}
+.resultado-busqueda{padding: 2px 20px;
+border: solid 1px #ccc;
+border-radius: 3px !important;}
+.contenedor-buscador{padding-bottom:30px;}
+.dataTables_empty{display:none;}
+
+
+.pieContainer {height: 200px;position: relative;margin-bottom:10px;}
+.pieBackground {position: absolute;width: 200px;height: 200px;border-radius: 100px !important;background:#c1c1c1;margin: 0px auto;left: 0px;right: 0px;}
+.pie {position: absolute;width: 200px;height: 200px;border-radius: 100px !important;clip: rect(0px, 100px, 200px, 0px);}
+.hold {position: absolute;width: 200px;height: 200px;border-radius: 100px !important;clip: rect(0px, 200px, 200px, 100px);margin: 0px auto;left: 0px;right: 0px;text-align:center;}
+.hold span{position: relative;
+right: 20px;
+top: 20px;display:inline-block}
+#pieSlice1 .pie {background-color: #00B23D;transform:rotate(10deg);}
+#pieSlice2 {transform: rotate(0deg);}
+#pieSlice2 .pie {background-color: #00B23D;transform: rotate(0deg);}
+
+.modulos-activos-info{position: absolute;
+top: 20%;
+line-height: 2em;}
+
+.encabezado-totales{display:inline-block;min-width:150px}
+
+.leyenda-activos-info{position: absolute;
+right:13%;
+top: 35%;
+line-height: 2em}
+
+.encabezado-leyenda{display:inline-block;min-width:30px;text-align:left;}
+.circulo-leyenda.circulo-leyenda-1{display:inline-block;border-radius:100px;width:20px;height:20px;background-color:#00B23D;vertical-align:middle}
+.circulo-leyenda.circulo-leyenda-2{display:inline-block;border-radius:100px;width:20px;height:20px;background-color:#c1c1c1;vertical-align:middle}
+
+
+.titulo-seccion-reporte{margin-bottom:5px !important;}
+.telefono-sucursal, .direccion-sucursal{display:block;font-weight:normal}
+.icono-info-sucursal{margin-right:10px;width:10px}
+#tabla-content_wrapper{margin-top:30px;}
+.links-edicion{float:right;}
+.links-edicion a{color:#94D600;font-size:0.8em;margin-left:10px;}
+.links-edicion a:hover{color:#c1c1c1}
+
+#porcentajespieon{position: absolute;
+right: 0;
+left: 50%;
+z-index: 99999;
+width: 20px;
+margin: 0 auto;}
+
+#eliminar-pantalla .col-lg-12, #eliminar-sucursal .col-lg-12{text-align:center !important;margin-bottom:10px;}
+#eliminar-pantalla .modal-dialog, #eliminar-sucursal .modal-dialog{width:300px !important;}
+#eliminar-pantalla .modal-header, #eliminar-sucursal .modal-header{border:none}
+#tabla-content_filter, #tabla-content_length{display:none;}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Busqueda Angular</title>
+    <style>
+	.pieContainer {
+  height: 150px;
+  margin-left: 30px;
+  position: relative;
+}
+
+.pieBackground {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
+} 
+
+.pie {
+  transition: all 1s;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  clip: rect(0px, 75px, 150px, 0px);
+}
+
+.hold {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  clip: rect(0px, 150px, 150px, 75px);
+}
+
+#pieSlice1 .pie {
+  background-color: #1b458b;
+  transform:rotate(30deg);
+}
+
+#pieSlice2 {
+  transform: rotate(180deg);
+}
+
+#pieSlice2 .pie {
+  background-color: #1b458b;
+  transform: rotate(60deg);
+}
+</style>
+</head>
+<body>
+   <input type="text" />
+</div>
+</body>
+</html>

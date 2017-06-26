@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html ng-app="falabella">
+
+<head>
+    <script src="js/angular.min.js"></script>
+    
+    <script src="js/angular-animate.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.3.2.js"></script>
+    <script src="js/ngDialog.min.js"></script>
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/angular-datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/ngDialog.css">
+    <link rel="stylesheet" href="css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+<link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/0.3.3/ng-table.min.js"></script>
+
+
+     <script src="js/app.js"></script>
+
+    <title>Falabella</title>
+
+ 
+</head>
+
+<body ng-controller="AppBody as app">
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-lg-12 header">
+                <div class="row">
+                    <div class="col-lg-6 logo-header header-contents">
+                        <img src="img/falabella.png" />
+                    </div>
+                    <div class="col-lg-6 login-info header-contents" ng-controller="controller_login">
+                        <span class="login-name">Bienvenido!, {{nombreCompleto}}</span>
+                        <span class="login-options"><a href="index.html">Cerrar sesión</a></span>
+                    </div>
+                </div>
+                <h4><a href="reporte-de-estado.html">Reporte de Estado</a> <span class="separador-h3">|</span> <a href="mantenedor-de-pantallas.html"
+                        class="active">Mantenedor de Pantallas</a></h4>
+            </div>
+            <div class="col-lg-12 main-content">
+                <div class="row">
+                 <div id="general">
+                    <div class="col-lg-3">
+                        <div class="contenedor-buscador">
+                            <input type="text" ng-model="filter" class="buscar-home" value="" placeholder="Buscar sucursal" />
+                            <div ng-show="filter.length > 0" class="resultado-busqueda" ng-repeat="sucursales in total | limitTo: 3 | filter: filter">
+
+
+                            <a href="" ng-click="filterSucursal(sucursales.id_sucursal)">{{sucursales.sucursal}} </a></div>
+
+                        </div>
+                        <!--                                       SUCURSALES                             -->
+
+                        
+                            <div>
+   
+                                <uib-accordion close-others="oneAtATime">
+
+                                    <uib-accordion-group heading="Todas las sucursales" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled" sucursal="0">
+                                        <div ng-repeat="sucursales in todas">
+
+                                        <!-- <a ng-click="filters.id_sucursal: {{sucursales.id_sucursal}}">{{sucursales.sucursal}}</a> -->
+                                        <a ng-click="filterSucursal(sucursales.id_sucursal)">{{sucursales.sucursal}}</a>
+                                        </div>
+                                    </uib-accordion-group>
+
+
+                                    <uib-accordion-group heading="Zona Norte" sucursal="1" >
+                                        <div ng-repeat="sucursales in todas | filter:{zona:'Norte'}">
+
+                                            <a ng-click="filterSucursal(sucursales.id_sucursal)">{{sucursales.sucursal}}</a>
+                                            <!-- <a href="{{sucursales.id_sucursal}}">{{sucursales.sucursal}}</a> -->
+                                        </div>
+                                    </uib-accordion-group>
+                                    <uib-accordion-group heading="Zona Centro" sucursal="2">
+                                        <div ng-repeat="sucursales in todas | filter:{zona:'Centro'}">
+                                                <!-- <a href="{{sucursales.id_sucursal}}">{{sucursales.sucursal}}</a> -->
+                                                <a ng-click="filterSucursal(sucursales.id_sucursal)">{{sucursales.sucursal}}</a>
+                                        </div>
+                                    </uib-accordion-group>
+                                    <uib-accordion-group heading="Zona Sur" sucursal="3">
+                                        <div ng-repeat="sucursales in todas | filter:{zona:'Sur'}">
+                                          <!-- <a href="{{sucursales.id_sucursal}}">{{sucursales.sucursal}}</a> -->
+                                            <a ng-click="filterSucursal(sucursales.id_sucursal)">{{sucursales.sucursal}}</a>
+                                        </div>
+                                    </uib-accordion-group>
+                            </div>
+
+                            <!--                                  FIN SUCURSALES                          -->
+                            <!--                               
+
+
+ AGREGAR SUCURSAL MODAL                  -->
+                            <div class="col-lg-12 agregar-sucursal">
+                                <a class="" data-toggle="modal" data-target="#add-sucursal">+ Agregar Sucursal</a>
+                            </div>
+                            <!--                                  FIN AGREGAR SUCURSAL -->
+                        
+                        </div>
+                        <div class="col-lg-9 mantenedor-pantallas">
+                            <div>
+                                <h3 class="titulo-seccion titulo-seccion-reporte"><span class="txt-green">Mantenedor de pantallas</span> / <span ng-show="filterId == null">{{pantalla}}</span> <span ng-repeat="sucursales in sucursales | filter:{id_sucursal: filterId}"><span ng-show="filterId != null">{{sucursales.sucursal}}</span>                                  <span class="links-edicion" ng-show="filterId != null"><a href="" data-toggle="modal" data-target="#edit-sucursal" ng-click="selectSucursal(sucursales)">Modificar</a> <a href="" data-toggle="modal" data-target="#eliminar-sucursal" ng-click="selectSucursal(sucursales)">Eliminar</a></span></span></h3>
+                                <div class="info-sucursal" ng-show="filterId != null">
+                                    <span ng-repeat="sucursal in lasucursal | filter:{id_sucursal:'1'}" class="direccion-sucursal"><i class="fa fa-map-marker icono-info-sucursal" aria-hidden="true"></i>
+                                        {{sucursal.direccion}}</span>
+                                    <span ng-repeat="sucursal in lasucursal | filter:{id_sucursal:'1'}" class="telefono-sucursal"><i class="fa fa-phone icono-info-sucursal" aria-hidden="true"></i>
+                                        {{sucursal.telefono}}</span>
+                                </div>
+                            </div>
+
+
+
+                          <!--   <table id="tabla-content" class="display tabla-central" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="cabecera-tabla">Ip</th>
+                                        <th class="cabecera-tabla">Módulo</th>
+                                        <th class="cabecera-tabla">DUID</th>
+                                        <th class="cabecera-tabla">Versión</th>
+                                        <th class="cabecera-tabla last-tabla">Modificar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="pantallas in todaspantallas 
+                                    | filter:{id_sucursal: filterId, id_zona: filterZone }">
+                                        <td>{{pantallas.ip}}</td>
+                                        <td>{{pantallas.modulo}}</td>
+                                        <td>{{pantallas.duid}}</td>
+                                        <td>{{pantallas.version}}</td>
+                                        <td><a class="" data-toggle="modal" data-target="#edit-pantalla" ng-click="selectPantalla(pantallas)" >Modificar</a></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table> -->
+
+<table ng-table="tableParams" class="table table-striped table-bordered table-hover table-condensed" show-filter="true">
+      <tr ng-repeat="pantallas in $data | filter:{id_sucursal: filterId, id_zona: filterZone }">
+                                        <td data-title="'IP'" sortable="'ip'">{{pantallas.ip}}</td>
+                                        <td data-title="'Modulo'" sortable="'modulo'">{{pantallas.modulo}}</td>
+                                        <td data-title="'Duid'" sortable="'duid'">{{pantallas.duid}}</td>
+                                        <td data-title="'Version'" sortable="'version'">{{pantallas.version}}</td>
+                                        <td ><a class="" data-toggle="modal" data-target="#edit-pantalla" ng-click="selectPantalla(pantallas)" >Modificar</a></td>
+
+                                    </tr>
+</table>
+                
+
+                    
+
+                            <div class="col-lg-12 agregar-sucursal">
+                                <a class="" data-toggle="modal" data-target="#add-pantalla">+ Agregar Pantalla</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modals -->
+<div id="add-sucursal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+	<div class="modal-header">
+		<h6 class="modal-alert-form" ng-show="alertadeenvio">Sucursal agregada con éxito.</h6>
+        <h4 class="modal-title" id="modal-title">Agregar Sucursal</h4>
+	</div>
+	<div class="modal-body" id="modal-body"  ng-controller="validador_formularios">
+		<form name="form1" method="post" action="">
+			<div class="row ingreso-datos-modal">
+				<div class="col-lg-4">Nombre Sucursal</div>
+				<div class="col-lg-8">
+					<input type="text" name="NombreSucursal" id="NombreSucursal" placeholder="Nombre Sucursal" class="txt-modal"  ng-model="sucursal.nombre" required/>
+				</div>
+				<div class="col-lg-4">Dirección Sucursal</div>
+				<div class="col-lg-8">
+					<input type="text" name="DireccionSucursal" id="DireccionSucursal" placeholder="Calle, Numeración, Ciudad" ng-model="sucursal.direccion" class="txt-modal" required/>
+				</div>
+				<div class="col-lg-4">Teléfono Sucursal</div>
+				<div class="col-lg-8">
+					<input type="text" name="TelefonoSucursal" id="TelefonoSucursal" placeholder="+56 9 9999 9999" ng-model="sucursal.telefono" class="txt-modal" required/>
+				</div>
+				<div class="col-lg-4">Zona Sucursal</div>
+				<div class="col-lg-8">
+					<select id="ZonaSucursal" ng-model="sucursal.zona" required>
+						<option value="" disabled selected>Seleccione una Zona</option>
+						<option value="Zona Norte">Zona Norte</option>
+						<option value="Zona Centro">Zona Centro</option>
+						<option value="Zona Sur">Zona Sur</option>
+					</select>
+				</div>
+				<div class="contenedor-botones-modal">
+					<button class="btn" type="button" ng-disabled="form1.$invalid" ng-click="submitted=true; enviado()">Agregar Sucursal</button> 
+				</div>
+			</div>
+		</form>
+	</div>
+   	<div class="modal-footer">
+    	<button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+    </div>
+</div>
+<!-- Modal content-->
+</div>
+</div>
+
+
+<div id="add-pantalla" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+	<div class="modal-header">
+		<h6 class="modal-alert-form" ng-show="alertadeenvio">Pantalla agregada con éxito.</h6>
+        <h4 class="modal-title" id="modal-title">Agregar Pantalla</h4>
+	</div>
+	<div class="modal-body" id="modal-body"  ng-controller="validador_formularios">
+		<form name="form2" method="post" action="">
+			<div class="row ingreso-datos-modal">
+				<div class="col-lg-4">IP</div>
+				<div class="col-lg-8">
+					<input type="text" name="IpPantalla" id="IpPantalla" placeholder="255.255.255.255" class="txt-modal"   required/>
+				</div>
+				<div class="col-lg-4">Módulo</div>
+				<div class="col-lg-8">
+					<input type="text" name="ModuloPantalla" id="ModuloPantalla" placeholder="IDENTIFICADOR EQUIPO" class="txt-modal" required/>
+				</div>
+				<div class="col-lg-4">DUID</div>
+				<div class="col-lg-8">
+					<input type="text" name="DuidPantalla" id="DuidPantalla" placeholder="MTCPH5RIKNW21"  class="txt-modal" required/>
+                    <input type="hidden" name="IdSucursal" id="IdSucursal" ng-model="pantalla.id_sucursal" value="{{filterId}}" />
+				</div>
+				<div class="contenedor-botones-modal">
+					<button class="btn" type="button" ng-disabled="form2.$invalid" ng-click="submitted=true; enviado()">Agregar Pantalla</button> 
+				</div>
+                     
+			</div>
+		</form>
+	</div>
+   	<div class="modal-footer">
+    	<button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+    </div>
+</div>
+<!-- Modal content-->
+</div>
+</div>
+
+
+<div id="edit-pantalla" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+	<div class="modal-header">
+		<h6 class="modal-alert-form" ng-show="alertadeenvio">Pantalla editada con éxito.</h6>
+        <h6 class="modal-alert-form" ng-show="alertadeenvio2">Pantalla Eliminada con éxito.</h6>
+        <h4 class="modal-title" id="modal-title">Editar Pantalla</h4>
+	</div>
+	<div class="modal-body" id="modal-body"  ng-controller="validador_formularios">
+		<form name="form3" method="post" action="">
+			<div class="row ingreso-datos-modal" >
+				<div class="col-lg-4">IP</div>
+				<div class="col-lg-8">
+					<input type="text" name="IpPantalla" id="IpPantalla" placeholder="255.255.255.255" class="txt-modal"  ng-model="miPantalla.ip"  required/>
+				</div>
+				<div class="col-lg-4">Módulo</div>
+				<div class="col-lg-8">
+					<input type="text" name="ModuloPantalla" id="ModuloPantalla" placeholder="IDENTIFICADOR EQUIPO" ng-model="miPantalla.modulo" class="txt-modal" required/>
+				</div>
+				<div class="col-lg-4">DUID</div>
+				<div class="col-lg-8">
+					<input type="text" name="DuidPantalla" id="DuidPantalla" placeholder="MTCPH5RIKNW21" ng-model="miPantalla.duid" class="txt-modal" required/>
+                    <input type="hidden" name="IdPantalla" id="IdPantalla" ng-model="mipantalla.id_pantalla" />
+				</div>
+				<div class="contenedor-botones-modal">
+					<button class="btn" type="button" ng-disabled="form3.$invalid" ng-click="submitted=true; enviado()">Editar Pantalla</button>  <button class="btn" type="button" ng-click="resetpantalla()">Resetear</button> <button class="btn" type="button" data-toggle="modal" data-target="#eliminar-pantalla" ng-click="eliminarpantalla(); enviado2()">Eliminar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+   	<div class="modal-footer"> 
+    	<button class="btn" type="button" data-dismiss="modal" >Cancelar</button> 
+    </div>
+</div>
+<!-- Modal content-->
+</div>
+</div>
+
+<div id="edit-sucursal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+	<div class="modal-header">
+		<h6 class="modal-alert-form" ng-show="alertadeenvio">Sucursal editada con éxito.</h6>
+        <h4 class="modal-title" id="modal-title">Editar Sucursal</h4>
+	</div>
+	<div class="modal-body" id="modal-body"  ng-controller="validador_formularios">
+		<form name="form4" method="post" action="">
+			<div class="row ingreso-datos-modal">
+				<div class="col-lg-4">Nombre Sucursal</div>
+				<div class="col-lg-8">
+					<input type="text" name="NombreSucursal" id="NombreSucursal" placeholder="Nombre Sucursal" class="txt-modal"  ng-model="miSucursal.sucursal" required />
+				</div>
+				<div class="col-lg-4">Dirección Sucursal</div>
+				<div class="col-lg-8">
+					<input type="text" name="DireccionSucursal" id="DireccionSucursal" placeholder="Calle, Numeración, Ciudad" ng-model="miSucursal.direccion" class="txt-modal" required/>
+				</div>
+				<div class="col-lg-4">Teléfono Sucursal</div>
+				<div class="col-lg-8">
+					<input type="text" name="TelefonoSucursal" id="TelefonoSucursal" placeholder="+56 9 9999 9999" ng-model="miSucursal.telefono" class="txt-modal" required/>
+                    <input type="hidden" name="IdSucursal" id="IdSucursal" ng-model="miSucursal.id_sucursal" value="{{filterId}}" />
+				</div>
+				<div class="col-lg-4">Zona Sucursal</div>
+				<div class="col-lg-8">
+					<select id="ZonaSucursal" ng-model="sucursal.zona" required>
+						<option value="" disabled>Seleccione una Zona</option>
+						<option value="Zona Norte">Zona Norte</option>
+						<option value="Zona Centro">Zona Centro</option>
+						<option value="Zona Sur">Zona Sur</option>
+					</select>
+				</div>
+				<div class="contenedor-botones-modal">
+					<button class="btn" type="button" ng-disabled="form4.$invalid" ng-click="submitted=true; enviado()">Modificar Sucursal</button> 
+				</div>
+			</div>
+		</form>
+	</div>
+   	<div class="modal-footer">
+    	<button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+    </div>
+</div>
+<!-- Modal content-->
+</div>
+</div>
+
+<div id="eliminar-sucursal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+	<div class="modal-header">
+	</div>
+	<div class="modal-body" id="modal-body"  ng-controller="validador_formularios">
+    <h6 class="modal-alert-form" ng-show="alertadeenvio">Sucursal Eliminada con éxito.</h6>
+		<form name="form1" method="post" action="">
+			<div class="row form-eliminar">
+				<div class="col-lg-12">Por favor confirmar esta acción</div>
+				<div class="contenedor-botones-modal">
+					<button class="btn" type="button" ng-click="submitted=true; enviado()">Eliminar Sucursal</button> 
+				</div>
+			</div>
+		</form>
+	</div>
+   	<div class="modal-footer">
+    	<button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+    </div>
+</div>
+<!-- Modal content-->
+</div>
+</div>
+
+
+
+<div id="eliminar-pantalla" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<!-- Modal content-->
+<div class="modal-content">
+	<div class="modal-header">
+	</div>
+	<div class="modal-body" id="modal-body"  ng-controller="validador_formularios">
+    <h6 class="modal-alert-form" ng-show="alertadeenvio">Pantalla Eliminada con éxito.</h6>
+		<form name="form1" method="post" action="">
+			<div class="row form-eliminar">
+				<div class="col-lg-12">Por favor confirmar esta acción</div>
+				<div class="contenedor-botones-modal">
+					<button class="btn" type="button" ng-click="submitted=true; enviado()">Eliminar Pantalla</button> 
+				</div>
+			</div>
+		</form>
+	</div>
+   	<div class="modal-footer">
+    	<button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+    </div>
+</div>
+<!-- Modal content-->
+</div>
+</div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#tabla-content').DataTable({
+                "order": [[3, "desc"]],
+                "pageLength": 8,
+            });
+		
+        });
+		
+    </script>
+</body>
+
+</html>
